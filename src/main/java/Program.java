@@ -1,3 +1,5 @@
+import javafx.embed.swing.JFXPanel;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,21 +9,20 @@ public class Program extends JFrame {
     public static void main(String[] args){
         new Program();
     }
-
-    private JButton saveBut,undoBut,redoBut;
+    final JFXPanel fxPanel = new JFXPanel();
+    private JButton saveBut,undoBut,redoBut, musicBut;
     private Question question = new Question(); // !!! implement what exactly the question is later !!!
-
+    private MusicPlayer musicPlayer = new Track2();
     Caretaker caretaker = new Caretaker();
     QuestionOriginator originator = new QuestionOriginator();
 
     int saveFiles = 0; // how many questions saved
     int questionIndex = 0; //which question is displayed on the screen
-
     public Program(){
         this.setSize(750,780);
         this.setTitle("Memento Test"); //!!!!!!!!!!!!!!!!!!! Change later
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        musicPlayer.setUpBeforePlay();
         JPanel panel1 = new JPanel();
 
         panel1.add(new JLabel("Question"));
@@ -31,6 +32,7 @@ public class Program extends JFrame {
         ButtonListener saveListener = new ButtonListener();
         ButtonListener undoListener = new ButtonListener();
         ButtonListener redoListener = new ButtonListener();
+        ButtonListener changeMusic = new ButtonListener();
 
         saveBut = new JButton("Save");
         saveBut.addActionListener(saveListener);
@@ -38,10 +40,13 @@ public class Program extends JFrame {
         undoBut.addActionListener(undoListener);
         redoBut = new JButton("Redo");
         redoBut.addActionListener(redoListener);
+        musicBut = new JButton("Change Music");
+        musicBut.addActionListener(changeMusic);
 
         panel1.add(saveBut);
         panel1.add(undoBut);
         panel1.add(redoBut);
+        panel1.add(musicBut);
 
         undoBut.setEnabled(false);
         redoBut.setEnabled(false);
@@ -88,6 +93,19 @@ public class Program extends JFrame {
                     undoBut.setEnabled(true);
                 }
                 else redoBut.setEnabled(false);
+            }
+            else if(e.getSource() == musicBut)
+            {   musicPlayer.Stop(musicPlayer.media);
+                if(musicPlayer.track1())
+                {
+                    musicPlayer = new Track2();
+                    musicPlayer.setUpBeforePlay();
+                }
+                else  if(musicPlayer.track2())
+                {
+                    musicPlayer = new Track1();
+                    musicPlayer.setUpBeforePlay();
+                }
             }
         }
     }

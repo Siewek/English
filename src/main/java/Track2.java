@@ -12,7 +12,7 @@ public class Track2 extends MusicPlayer{
 
     @Override
     void playTrack2() {
-        filePath = ""; //         INPUT YOUR OWN TRACK!!!!!!                "G:\\Studia\\Semestr 5\\ZTP\\English\\src\\main\\resources\\Glitter Blast.mp3";
+        filePath = "src\\main\\resources\\Glitter Blast.mp3";
         media = new MediaPlayer(new Media(new File(filePath).toURI().toString()));
         Play(media);
     }

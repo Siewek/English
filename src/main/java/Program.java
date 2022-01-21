@@ -26,7 +26,7 @@ public class Program extends JFrame {
         JPanel panel1 = new JPanel();
 
         panel1.add(new JLabel("Question"));
-
+        
         //add the question here
 
         ButtonListener saveListener = new ButtonListener();
@@ -52,6 +52,7 @@ public class Program extends JFrame {
         redoBut.setEnabled(false);
         this.add(panel1);
         this.setVisible(true);
+        //panel1.add(new JLabel("Question"));
     }
 
     class ButtonListener implements ActionListener{

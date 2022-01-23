@@ -14,8 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="773.0" prefWidth="828.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Dbmanager">
+<AnchorPane prefHeight="773.0" prefWidth="828.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DbManagerScene">
    <children>
       <TableView layoutX="30.0" layoutY="127.0" prefHeight="282.0" prefWidth="621.0">
         <columns>

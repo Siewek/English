@@ -1,5 +1,4 @@
-
-INSERT INTO word VALUES
+INSERT INTO words VALUES
 ('scrumptious','przepyszny','hard'),
 ('redoubtable','groźny','hard'),
 ('insouciance','beztroska','hard'),

@@ -1,26 +1,66 @@
 import javafx.embed.swing.JFXPanel;
+import org.apache.ibatis.jdbc.ScriptRunner;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.sql.*;
+import java.util.Scanner;
 
 public class Program extends JFrame {
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws SQLException, FileNotFoundException {
+
+
+        //String jdbcUrl = "jdbc:sqlite:wordsdb.db";
+        //Connection connection = DriverManager.getConnection(jdbcUrl);
+
+        /* String sql = "create table words (word varchar(20), translation varchar(20), difficulty varchar(10))";
+         Statement statement = connection.createStatement();
+        statement.executeUpdate(sql);*/
+
+     /*  String sql = "insert into words values('bad', 'zły', 'easy')";
+        Statement statement = connection.createStatement();
+        int rows = statement.executeUpdate(sql);
+        if(rows > 0)
+        {
+            System.out.println("row created");
+        }*/
+
+       /* String sql = "select rowid, * from words";
+        Statement statement = connection.createStatement();
+        ResultSet result = statement.executeQuery(sql);
+        while(result.next())
+        {
+            int rowid = result.getInt("rowid");
+            String word = result.getString("word");
+            String translation = result.getString("translation");
+            String difficulty = result.getString("difficulty");
+
+            System.out.println(rowid + " " + word + " " + translation + " "+ difficulty);
+        }*/
+
+
+       /* ScriptRunner sr = new ScriptRunner(connection);
+        Reader reader = new BufferedReader(new FileReader("src\\main\\resources\\script.sql"));
+        sr.runScript(reader);*/
+
         new Program();
     }
     final JFXPanel fxPanel = new JFXPanel();
     private JButton saveBut,undoBut,redoBut, musicBut;
     private Question question = new Question(); // !!! implement what exactly the question is later !!!
     private MusicPlayer musicPlayer = new Track2();
+    private SqliteFacade db = new SqliteFacade();
     Caretaker caretaker = new Caretaker();
     QuestionOriginator originator = new QuestionOriginator();
 
     int saveFiles = 0; // how many questions saved
     int questionIndex = 0; //which question is displayed on the screen
-    public Program(){
+    public Program() throws SQLException {
         this.setSize(750,780);
-        this.setTitle("Memento Test"); //!!!!!!!!!!!!!!!!!!! Change later
+        this.setTitle("English"); //!!!!!!!!!!!!!!!!!!! Change later
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         musicPlayer.setUpBeforePlay();
         JPanel panel1 = new JPanel();
@@ -56,6 +96,9 @@ public class Program extends JFrame {
     }
 
     class ButtonListener implements ActionListener{
+        ButtonListener() throws SQLException {
+        }
+
         public void actionPerformed(ActionEvent e)
         {
             if(e.getSource() == saveBut)
@@ -107,7 +150,12 @@ public class Program extends JFrame {
                     musicPlayer = new Track1();
                     musicPlayer.setUpBeforePlay();
                 }
+                Word testword = new Word("scrumptious","przepyszny", "hard");
+                db.addWord(testword);
             }
         }
+
     }
+
+
 }

@@ -13,8 +13,8 @@ public class Program extends JFrame {
     public static void main(String[] args) throws SQLException, FileNotFoundException {
 
 
-        //String jdbcUrl = "jdbc:sqlite:wordsdb.db";
-        //Connection connection = DriverManager.getConnection(jdbcUrl);
+        String jdbcUrl = "jdbc:sqlite:wordsdb.db";
+        Connection connection = DriverManager.getConnection(jdbcUrl);
 
         /* String sql = "create table words (word varchar(20), translation varchar(20), difficulty varchar(10))";
          Statement statement = connection.createStatement();
@@ -28,7 +28,7 @@ public class Program extends JFrame {
             System.out.println("row created");
         }*/
 
-       /* String sql = "select rowid, * from words";
+        String sql = "select rowid, * from words";
         Statement statement = connection.createStatement();
         ResultSet result = statement.executeQuery(sql);
         while(result.next())
@@ -39,14 +39,14 @@ public class Program extends JFrame {
             String difficulty = result.getString("difficulty");
 
             System.out.println(rowid + " " + word + " " + translation + " "+ difficulty);
-        }*/
+        }
 
 
-       /* ScriptRunner sr = new ScriptRunner(connection);
+        /*ScriptRunner sr = new ScriptRunner(connection);
+        sr.setEscapeProcessing(false);
         Reader reader = new BufferedReader(new FileReader("src\\main\\resources\\script.sql"));
         sr.runScript(reader);*/
-
-        new Program();
+       //new Program();*/
     }
     final JFXPanel fxPanel = new JFXPanel();
     private JButton saveBut,undoBut,redoBut, musicBut;

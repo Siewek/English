@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Program extends JFrame {
@@ -13,8 +14,8 @@ public class Program extends JFrame {
     public static void main(String[] args) throws SQLException, FileNotFoundException {
 
 
-        String jdbcUrl = "jdbc:sqlite:wordsdb.db";
-        Connection connection = DriverManager.getConnection(jdbcUrl);
+       // String jdbcUrl = "jdbc:sqlite:wordsdb.db";
+       // Connection connection = DriverManager.getConnection(jdbcUrl);
 
         /* String sql = "create table words (word varchar(20), translation varchar(20), difficulty varchar(10))";
          Statement statement = connection.createStatement();
@@ -28,7 +29,7 @@ public class Program extends JFrame {
             System.out.println("row created");
         }*/
 
-        String sql = "select rowid, * from words";
+       /* String sql = "select rowid, * from words";
         Statement statement = connection.createStatement();
         ResultSet result = statement.executeQuery(sql);
         while(result.next())
@@ -39,14 +40,14 @@ public class Program extends JFrame {
             String difficulty = result.getString("difficulty");
 
             System.out.println(rowid + " " + word + " " + translation + " "+ difficulty);
-        }
+        }*/
 
 
         /*ScriptRunner sr = new ScriptRunner(connection);
         sr.setEscapeProcessing(false);
         Reader reader = new BufferedReader(new FileReader("src\\main\\resources\\script.sql"));
         sr.runScript(reader);*/
-       //new Program();*/
+       new Program();
     }
     final JFXPanel fxPanel = new JFXPanel();
     private JButton saveBut,undoBut,redoBut, musicBut;
@@ -150,8 +151,15 @@ public class Program extends JFrame {
                     musicPlayer = new Track1();
                     musicPlayer.setUpBeforePlay();
                 }
-                Word testword = new Word("scrumptious","przepyszny", "hard");
-                db.addWord(testword);
+                //db.deleteWord(2);
+                Word updatetest = new Word("balls","jajka","easy");
+               // db.updateWord("young",updatetest);
+                ArrayList<Word> test = db.getWords();
+                for(int i = 0; i < test.stream().count() -1; i++)
+                {
+                    System.out.println(test.get(i).getWordWord() + " "+test.get(i).getWordDifficulty()+ " " +test.get(i).getWordTranslation());
+                }
+
             }
         }
 

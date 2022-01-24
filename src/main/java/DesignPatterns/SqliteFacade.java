@@ -91,7 +91,7 @@ public class SqliteFacade implements DatabaseFacade {
     }
 
     @Override
-    public ArrayList<Word> getWords() {
+    public ArrayList<Word> getAllWords() {
         String sql = "select rowid, * from words";
         try {
             Statement statement = connection.createStatement();
@@ -110,6 +110,30 @@ public class SqliteFacade implements DatabaseFacade {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return null;
+    }
+    public ArrayList<Word> getWordsOfDifficulty(String wantedDifficutly)
+    {String sql = "select rowid, * from words WHERE difficulty = ?";
+        try{
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1,wantedDifficutly);
+            ResultSet result = pstmt.executeQuery();
+            while (result.next())
+            {
+                int rowid = result.getInt("rowid");
+                String word = result.getString("word");
+                String translation = result.getString("translation");
+                String difficulty = result.getString("difficulty");
+                Word nextWord = new Word(word,translation,difficulty);
+                //System.out.println(nextWord.getWord() +" "+ nextWord.getTranslation() + " "+difficulty );
+                this.words.add(nextWord);
+            }
+            return this.words;
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 }

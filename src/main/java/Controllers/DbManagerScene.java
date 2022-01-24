@@ -45,7 +45,7 @@ public class DbManagerScene implements Initializable {
 
         try {
             SqliteFacade sqliteFacade = new SqliteFacade();
-            words.addAll(sqliteFacade.getWords());
+            words.addAll(sqliteFacade.getAllWords());
 
         } catch (SQLException exception) {
             exception.printStackTrace();

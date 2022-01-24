@@ -10,5 +10,6 @@ public interface DatabaseFacade {
     public void updateWord(String word, Word word2);
     public void deleteWord(int ID);
     public Word getWord(int ID);
-    public ArrayList<Word> getWords();
+    public ArrayList<Word> getAllWords();
+    public ArrayList<Word> getWordsOfDifficulty(String difficulty);
 }

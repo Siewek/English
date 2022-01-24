@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Program">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Program">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="600.0">
          <children>
@@ -22,9 +19,9 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="117.0" spacing="25.0">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="120.0" text="Endless Quiz" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="119.0" text="Test" />
-                  <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="136.0" text="Manage Database" />
+                  <Button mnemonicParsing="false" onAction="#OnQuizStart" prefHeight="25.0" prefWidth="120.0" text="Endless Quiz" />
+                  <Button mnemonicParsing="false" onAction="#OnTestStart" prefHeight="25.0" prefWidth="119.0" text="Test" />
+                  <Button mnemonicParsing="false" onAction="#OnManageDb" prefHeight="25.0" prefWidth="136.0" text="Manage Database" />
                </children>
             </VBox>
          </children>

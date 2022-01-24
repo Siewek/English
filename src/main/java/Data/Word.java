@@ -1,10 +1,12 @@
+package Data;
+
+import java.nio.charset.StandardCharsets;
+
 public class Word {
 
-    private String word;
-
-    private String translation;
-
-    private String difficulty;
+    private final String word;
+    private final String translation;
+    private final String difficulty;
 
     public Word(String word, String translation, String difficulty)
     {
@@ -13,15 +15,13 @@ public class Word {
         this.difficulty = difficulty;
     }
 
-    public String getWordWord()
-    {
+    public String getWord() {
         return this.word;
     }
-    public String getWordTranslation()
-    {
+    public String getTranslation() {
         return this.translation;
     }
-    public String getWordDifficulty()
+    public String getDifficulty()
     {
         return this.difficulty;
     }

@@ -1,4 +1,7 @@
-import java.lang.reflect.Array;
+package DesignPatterns;
+
+import Data.Word;
+
 import java.util.ArrayList;
 
 public interface DatabaseFacade {

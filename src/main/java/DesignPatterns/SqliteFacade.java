@@ -1,17 +1,25 @@
+package DesignPatterns;
+
+import Data.Word;
+
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
-public class SqliteFacade implements DatabaseFacade{
+public class SqliteFacade implements DatabaseFacade {
+    private static String jdbcUrl = "jdbc:sqlite:wordsdb.db";
+    private final Connection connection;
 
     public SqliteFacade() throws SQLException {
+        Properties connectionProperties = new Properties();
+        connectionProperties.put("charSet", "UTF8");
+        connectionProperties.put("encoding", "UTF8");
+        connection= DriverManager.getConnection(jdbcUrl, connectionProperties);
     }
-    private String jdbcUrl = "jdbc:sqlite:wordsdb.db";
-    private Connection connection = DriverManager.getConnection(jdbcUrl);
-
 
     @Override
     public void addWord(Word word) {
-        String sql = "insert into words values('"+word.getWordWord()+"','"+word.getWordTranslation()+"','"+word.getWordDifficulty()+"')";
+        String sql = "insert into words values('"+word.getWord()+"','"+word.getTranslation()+"','"+word.getDifficulty()+"')";
         Statement statement = null;
         try {
             statement = connection.createStatement();
@@ -36,9 +44,9 @@ public class SqliteFacade implements DatabaseFacade{
     //System.out.println(word2.getWordWord() +" "+ word2.getWordDifficulty() + " "+ word2.getWordTranslation());
     try{
         PreparedStatement pstmt = connection.prepareStatement(sql);
-        pstmt.setString(1,word2.getWordWord());
-        pstmt.setString(2,word2.getWordTranslation());
-        pstmt.setString(3,word2.getWordDifficulty());
+        pstmt.setString(1,word2.getWord());
+        pstmt.setString(2,word2.getTranslation());
+        pstmt.setString(3,word2.getDifficulty());
         pstmt.setString(4,word);
         pstmt.executeUpdate();
     } catch (Exception e) {
@@ -95,7 +103,7 @@ public class SqliteFacade implements DatabaseFacade{
                 String difficulty = result.getString("difficulty");
 
                 Word nextWord = new Word(word,translation,difficulty);
-                //System.out.println(word +" "+ translation + " "+difficulty );
+                //System.out.println(nextWord.getWord() +" "+ nextWord.getTranslation() + " "+difficulty );
                 this.words.add(nextWord);
             }
             return this.words;

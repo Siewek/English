@@ -11,20 +11,23 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableCell;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.nio.ByteBuffer;
-import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class DbManagerScene implements Initializable {
 
+    @FXML private Label successLabel;
+    @FXML private Label labelWarning;
+    @FXML private TextField translationField;
+    @FXML private TextField wordField;
+    @FXML private RadioButton easyRadioBtn;
+    @FXML private RadioButton hardRadioBtn;
+    @FXML private RadioButton mediumRadioBtn;
     @FXML private TableView<Word> wordsTableView;
     @FXML private TableColumn<Word, String> wordCol;
     @FXML private TableColumn<Word, ByteBuffer> translationCol;
@@ -84,5 +87,34 @@ public class DbManagerScene implements Initializable {
     }
 
     @FXML public void OnDeleteItem(ActionEvent actionEvent) {
+    }
+
+    @FXML public void OnAddWord(ActionEvent actionEvent) {
+        if(wordField.getText().trim().isEmpty() || translationField.getText().trim().isEmpty()) {
+            labelWarning.setVisible(true);
+            successLabel.setVisible(false);
+            labelWarning.setText("Fields cannot be empty!");
+            return;
+        }
+
+        String difficulty = easyRadioBtn.isSelected() ? "easy" : (mediumRadioBtn.isSelected() ? "medium" : "hard" );
+        Word word = new Word(wordField.getText().trim(),
+                translationField.getText(), difficulty);
+
+        try {
+            SqliteFacade sqliteFacade = new SqliteFacade();
+            sqliteFacade.addWord(word);
+            words.add(word);
+        } catch(SQLException exception) {
+            exception.printStackTrace();
+            exception.getCause();
+        }
+
+        wordField.setText(null);
+        translationField.setText(null);
+        easyRadioBtn.setSelected(true);
+
+        successLabel.setVisible(true);
+        labelWarning.setVisible(false);
     }
 }

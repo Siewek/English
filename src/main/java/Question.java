@@ -1,25 +1,35 @@
 import Data.Word;
+import DesignPatterns.SqliteFacade;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class Question {
 
-    private Question question;
-    private Word word;
-    private String answer;
+    private String word;
+    private String correctAnswer;
+    private DifficultyStrategy questionType;
 
-    /*public Question(Word word,String answer)
-    {
-        this.word = word;
-        this.answer = answer;
-    }*/
+
 
     public Question getQuestion()
     {
-        return question;
+        return this;
     }
 
-    public Question setQuestion(Question _question)
-    {
-        question = _question;
-        return getQuestion();
+    public void setQuestion(String difficulty) throws SQLException {
+        if(difficulty == "Easy")
+        {
+            questionType = new EasyDifficulty();
+        }
+        else if(difficulty == "Medium")
+        {
+            questionType = new MediumDifficulty();
+        }
+        else if (difficulty == "Hard")
+        {
+            questionType = new HardDifficulty();
+        }
+        questionType.chooseNextQuestion();
     }
 }

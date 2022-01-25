@@ -93,6 +93,7 @@ public class SqliteFacade implements DatabaseFacade {
     @Override
     public ArrayList<Word> getAllWords() {
         String sql = "select rowid, * from words";
+        words.clear();
         try {
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery(sql);
@@ -115,6 +116,7 @@ public class SqliteFacade implements DatabaseFacade {
     public ArrayList<Word> getWordsOfDifficulty(String wantedDifficutly)
     {String sql = "select rowid, * from words WHERE difficulty = ?";
         try{
+            words.clear();
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1,wantedDifficutly);
             ResultSet result = pstmt.executeQuery();

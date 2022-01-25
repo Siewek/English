@@ -52,7 +52,7 @@ public class Program extends JFrame {
        new Program();
     }
     final JFXPanel fxPanel = new JFXPanel();
-    private JButton saveBut,undoBut,redoBut, musicBut;
+    private JButton saveBut,undoBut,redoBut, musicBut,easyBut,mediumBut,hardBut;
     private Question question = new Question(); // !!! implement what exactly the question is later !!!
     private MusicPlayer musicPlayer = new Track2();
     private SqliteFacade db = new SqliteFacade();
@@ -76,6 +76,9 @@ public class Program extends JFrame {
         ButtonListener undoListener = new ButtonListener();
         ButtonListener redoListener = new ButtonListener();
         ButtonListener changeMusic = new ButtonListener();
+        ButtonListener easyListener = new ButtonListener();
+        ButtonListener mediumListener = new ButtonListener();
+        ButtonListener hardListener = new ButtonListener();
 
         saveBut = new JButton("Save");
         saveBut.addActionListener(saveListener);
@@ -86,10 +89,20 @@ public class Program extends JFrame {
         musicBut = new JButton("Change Music");
         musicBut.addActionListener(changeMusic);
 
+        easyBut = new JButton("Easy");
+        easyBut.addActionListener(easyListener);
+        mediumBut = new JButton("Medium");
+        mediumBut.addActionListener(mediumListener);
+        hardBut= new JButton("Hard");
+        hardBut.addActionListener(hardListener)
+        ;
         panel1.add(saveBut);
         panel1.add(undoBut);
         panel1.add(redoBut);
         panel1.add(musicBut);
+        panel1.add(easyBut);
+        panel1.add(mediumBut);
+        panel1.add(hardBut);
 
         undoBut.setEnabled(false);
         redoBut.setEnabled(false);
@@ -106,9 +119,9 @@ public class Program extends JFrame {
         {
             if(e.getSource() == saveBut)
             {
-                Question currentQuestion = question.getQuestion();
+               // Question currentQuestion = question.getQuestion();
 
-                originator.setQuestion(currentQuestion);
+               // originator.setQuestion(currentQuestion);
 
                 caretaker.addMemento(originator.createMemento());
 
@@ -122,7 +135,7 @@ public class Program extends JFrame {
                     questionIndex--;
                     Question currentQuestion = originator.restoreMemento(caretaker.getMemento(questionIndex));
 
-                    question.setQuestion(currentQuestion);
+                   // question.setQuestion(currentQuestion);
 
                     redoBut.setEnabled(true);
 
@@ -136,7 +149,7 @@ public class Program extends JFrame {
                     questionIndex++;
                     Question currentQuestion = originator.restoreMemento(caretaker.getMemento(questionIndex));
 
-                    question.setQuestion(currentQuestion);
+                 //   question.setQuestion(currentQuestion);
                     undoBut.setEnabled(true);
                 }
                 else redoBut.setEnabled(false);
@@ -159,12 +172,36 @@ public class Program extends JFrame {
                 //db.addWord(updatetest);
                // db.updateWord("young",updatetest);
                 //db.getWordsOfDifficulty("easy");
-                ArrayList<Word> test = db.getWordsOfDifficulty("hard");
-                for(int i = 0; i < test.stream().count() -1; i++)
+               //ArrayList<Word> test = db.getWordsOfDifficulty("hard");
+                /*for(int i = 0; i < test.stream().count() -1; i++)
                 {
                     System.out.println(test.get(i).getWord() + " "+test.get(i).getDifficulty()+ " " +test.get(i).getTranslation());
-                }
+                }*/
 
+            }
+            else if(e.getSource() == easyBut)
+            {
+                try {
+                    question.setQuestion("Easy");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            else if(e.getSource() == mediumBut)
+            {
+                try {
+                    question.setQuestion("Medium");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            }
+            else if(e.getSource() == hardBut)
+            {
+                try {
+                    question.setQuestion("Hard");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         }
 

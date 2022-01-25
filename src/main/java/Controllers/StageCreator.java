@@ -1,3 +1,5 @@
+package Controllers;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,7 +15,7 @@ public class StageCreator {
     public static Stage create(String fxmlFile, String title, Command c) {
         Stage stage = new Stage();
         try {
-            FXMLLoader root = new FXMLLoader(Program.class.getResource(fxmlFile));
+            FXMLLoader root = new FXMLLoader(StageCreator.class.getResource(fxmlFile));
             Parent p = root.load();
 
             if(c != null)
@@ -34,6 +36,10 @@ public class StageCreator {
         }
 
         return stage;
+    }
+
+    public static Stage create(String fxmlFile, String title) {
+        return create(fxmlFile, title, null);
     }
 
     public static Stage create(String fxmlFile) {

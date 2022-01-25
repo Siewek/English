@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
 import java.nio.ByteBuffer;
@@ -30,7 +31,7 @@ public class DbManagerScene implements Initializable {
     @FXML private RadioButton mediumRadioBtn;
     @FXML private TableView<Word> wordsTableView;
     @FXML private TableColumn<Word, String> wordCol;
-    @FXML private TableColumn<Word, ByteBuffer> translationCol;
+    @FXML private TableColumn<Word, String> translationCol;
     @FXML private TableColumn<Word, String> difficultyCol;
     @FXML private TextField searchFilter;
 
@@ -43,6 +44,10 @@ public class DbManagerScene implements Initializable {
         wordCol.setCellValueFactory(new PropertyValueFactory<>("word"));
         translationCol.setCellValueFactory(new PropertyValueFactory<>("translation"));
         difficultyCol.setCellValueFactory(new PropertyValueFactory<>("difficulty"));
+
+        wordCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        translationCol.setCellFactory(TextFieldTableCell.forTableColumn());
+        difficultyCol.setCellFactory(TextFieldTableCell.forTableColumn());
 
         try {
             SqliteFacade sqliteFacade = new SqliteFacade();
@@ -85,6 +90,11 @@ public class DbManagerScene implements Initializable {
                     deleteSelecetedBtn.setDisable(true);
             }
         });
+
+        wordsTableView.setEditable(true);
+        difficultyCol.setEditable(true);
+        translationCol.setEditable(true);
+        wordCol.setEditable(true);
     }
 
     @FXML public void OnDeleteItem(ActionEvent actionEvent) {
@@ -131,5 +141,39 @@ public class DbManagerScene implements Initializable {
 
         successLabel.setVisible(true);
         labelWarning.setVisible(false);
+    }
+
+    public void OnWordEditCommit(TableColumn.CellEditEvent<Word, String> wordStringCellEditEvent) {
+        Word rowValue = wordStringCellEditEvent.getRowValue();
+        Word updatedValue = new Word(rowValue.getId(), wordStringCellEditEvent.getNewValue(), rowValue.getTranslation(), rowValue.getDifficulty());
+        words.set(words.indexOf(rowValue), updatedValue);
+
+        this.UpdateWord(updatedValue);
+    }
+
+    public void OnTransEditCommit(TableColumn.CellEditEvent<Word, String> wordStringCellEditEvent) {
+        Word rowValue = wordStringCellEditEvent.getRowValue();
+        Word updatedValue = new Word(rowValue.getId(), rowValue.getWord(), wordStringCellEditEvent.getNewValue(), rowValue.getDifficulty());
+        words.set(words.indexOf(rowValue), updatedValue);
+
+        this.UpdateWord(updatedValue);
+    }
+
+    public void OnDiffEditCommit(TableColumn.CellEditEvent<Word, String> wordStringCellEditEvent) {
+        Word rowValue = wordStringCellEditEvent.getRowValue();
+        Word updatedValue = new Word(rowValue.getId(), rowValue.getWord(), rowValue.getTranslation(), wordStringCellEditEvent.getNewValue());
+        words.set(words.indexOf(rowValue), updatedValue);
+
+        this.UpdateWord(updatedValue);
+    }
+
+    private void UpdateWord(Word word) {
+        try {
+            SqliteFacade facade = new SqliteFacade();
+            facade.updateWord((int) word.getId(), word);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            exception.getCause();
+        }
     }
 }

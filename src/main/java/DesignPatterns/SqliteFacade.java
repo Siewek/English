@@ -39,15 +39,15 @@ public class SqliteFacade {
         return -1;
     }
 
-    public void updateWord(String word, Word word2) {
-        String sql = "UPDATE words SET word = ?," + "translation = ?, " + "difficulty = ? " + "WHERE word = ?";
+    public void updateWord(int id, Word word2) {
+        String sql = "UPDATE words SET word = ?," + "translation = ?, " + "difficulty = ? " + "WHERE rowid = ?";
         //System.out.println(word2.getWordWord() +" "+ word2.getWordDifficulty() + " "+ word2.getWordTranslation());
         try{
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setString(1,word2.getWord());
             pstmt.setString(2,word2.getTranslation());
             pstmt.setString(3,word2.getDifficulty());
-            pstmt.setString(4,word);
+            pstmt.setInt(4, id);
             pstmt.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

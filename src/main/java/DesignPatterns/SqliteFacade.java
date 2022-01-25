@@ -2,6 +2,7 @@ package DesignPatterns;
 
 import Data.Word;
 
+import java.awt.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -22,11 +23,25 @@ public class SqliteFacade implements DatabaseFacade {
         String sql = "insert into words values('"+word.getWord()+"','"+word.getTranslation()+"','"+word.getDifficulty()+"')";
         Statement statement = null;
         try {
-            statement = connection.createStatement();
+            PreparedStatement pstmt = connection.prepareStatement(sql,statement.RETURN_GENERATED_KEYS);
+            pstmt.execute();
+            ResultSet result = pstmt.getGeneratedKeys();
+            int generatedKey = 0;
+            if(result.next())
+            {
+                generatedKey = result.getInt(1); // ID świeżo dodanego rzędu
+            }
+            System.out.println("RowID of the newly added word is: " + generatedKey);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        int rows = 0;
+       /* try {
+            statement = connection.createStatement();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       int rows = 0;
         try {
             rows = statement.executeUpdate(sql);
         } catch (SQLException e) {
@@ -35,7 +50,9 @@ public class SqliteFacade implements DatabaseFacade {
         if(rows > 0)
         {
             System.out.println("row created");
-        }
+        }*/
+
+
     }
 
     @Override

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Question {
 
-    private String word;
+    private Word word;
     private String correctAnswer;
     private DifficultyStrategy questionType;
 
@@ -30,6 +30,6 @@ public class Question {
         {
             questionType = new HardDifficulty();
         }
-        questionType.chooseNextQuestion();
+        word = questionType.chooseNextQuestion();
     }
 }

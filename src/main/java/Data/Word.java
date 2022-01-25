@@ -4,6 +4,7 @@ import java.nio.charset.StandardCharsets;
 
 public class Word {
 
+    private final long id = 0;
     private final String word;
     private final String translation;
     private final String difficulty;
@@ -25,6 +26,7 @@ public class Word {
     {
         return this.difficulty;
     }
-
-
+    public long getId() {
+        return id;
+    }
 }

@@ -4,11 +4,23 @@ import javafx.stage.Stage;
 
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Program extends Application {
 
     public static void main(String[] args) throws SQLException, FileNotFoundException {
         launch(args);
+
+       /*  //Testowanie Generowania Odpowiedzi
+
+       Question question = new Question();
+        question.setQuestion("Easy");
+        ArrayList<String> answers = question.generateAnswers();
+        for (int i = 0; i < answers.stream().count();i++)
+        {
+            System.out.println(answers.get(i));
+        }*/
+
         // String jdbcUrl = "jdbc:sqlite:wordsdb.db";
         // Connection connection = DriverManager.getConnection(jdbcUrl);
 

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Program extends Application {
 
     public static void main(String[] args) throws SQLException, FileNotFoundException {
+
         launch(args);
 
        /*  //Testowanie Generowania Odpowiedzi

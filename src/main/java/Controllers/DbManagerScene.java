@@ -34,6 +34,8 @@ public class DbManagerScene implements Initializable {
     @FXML private TableColumn<Word, String> difficultyCol;
     @FXML private TextField searchFilter;
 
+    @FXML private Button deleteSelecetedBtn;
+
     private final ObservableList<Word> words = FXCollections.observableArrayList();
     private Word selectedWord = null;
 
@@ -78,15 +80,32 @@ public class DbManagerScene implements Initializable {
         wordsTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Word>() {
             @Override
             public void changed(ObservableValue<? extends Word> observableValue, Word word, Word t1) {
-                if(t1 != null)
+                if(t1 != null) {
                     selectedWord = t1;
-                else
+                    deleteSelecetedBtn.setDisable(false);
+                }
+                else {
                     selectedWord = null;
+                    deleteSelecetedBtn.setDisable(true);
+                }
             }
         });
     }
 
     @FXML public void OnDeleteItem(ActionEvent actionEvent) {
+        if(selectedWord == null) {
+            deleteSelecetedBtn.setDisable(true);
+            return;
+        }
+
+        try {
+            SqliteFacade sqliteFacade = new SqliteFacade();
+            //sqliteFacade.deleteWord();
+
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+            exception.getCause();
+        }
     }
 
     @FXML public void OnAddWord(ActionEvent actionEvent) {

@@ -168,15 +168,15 @@ public class Program extends JFrame {
                 }
                 //db.deleteWord(2);
 
-                Word updatetest = new Word("piechota","infantry","medium");
-               // db.addWord(updatetest);
+                Word updatetest = new Word("pszczółka","bee","easy");
+                //db.addWord(updatetest);
                // db.updateWord("young",updatetest);
                 //db.getWordsOfDifficulty("easy");
-               ArrayList<Word> test = db.getAllWords();
-                for(int i = 0; i < test.stream().count() ; i++)
+               //ArrayList<Word> test = db.getWordsOfDifficulty("hard");
+                /*for(int i = 0; i < test.stream().count() -1; i++)
                 {
                     System.out.println(test.get(i).getWord() + " "+test.get(i).getDifficulty()+ " " +test.get(i).getTranslation());
-                }
+                }*/
 
             }
             else if(e.getSource() == easyBut)

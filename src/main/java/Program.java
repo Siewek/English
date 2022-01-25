@@ -20,7 +20,8 @@ public class Program extends Application {
         {
             System.out.println(answers.get(i));
         }*/
-
+        //Testowanie Dekoratora
+        //Question question = new ReversedQuestion(new Question());
         // String jdbcUrl = "jdbc:sqlite:wordsdb.db";
         // Connection connection = DriverManager.getConnection(jdbcUrl);
 

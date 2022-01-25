@@ -5,10 +5,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Question {
+public class Question implements QuestionInterface{
 
     protected Word word;
-    private Word helpWord;
+    protected Word helpWord;
     protected DifficultyStrategy questionType;
     protected ArrayList<String> answers = new ArrayList<>();
     protected int correctAnswerIndex;
@@ -18,7 +18,7 @@ public class Question {
     {
         return this;
     }
-
+    @Override
     public void setQuestion(String difficulty) throws SQLException {
         if(difficulty == "Easy")
         {
@@ -34,7 +34,7 @@ public class Question {
         }
         word = questionType.chooseNextQuestion();
     }
-
+    @Override
     public ArrayList<String> generateAnswers()
     {   answers.clear();
        correctAnswerIndex = random.nextInt(4); //generuje pomiędzy 0 a 3

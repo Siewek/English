@@ -7,9 +7,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
-public class SqliteFacade implements DatabaseFacade {
+public class SqliteFacade {
     private static String jdbcUrl = "jdbc:sqlite:wordsdb.db";
     private final Connection connection;
+
+    public ArrayList<Word> words = new ArrayList<Word>();
 
     public SqliteFacade() throws SQLException {
         Properties connectionProperties = new Properties();
@@ -18,8 +20,7 @@ public class SqliteFacade implements DatabaseFacade {
         connection= DriverManager.getConnection(jdbcUrl, connectionProperties);
     }
 
-    @Override
-    public void addWord(Word word) {
+    public int addWord(Word word) {
         String sql = "insert into words values('"+word.getWord()+"','"+word.getTranslation()+"','"+word.getDifficulty()+"')";
         Statement statement = null;
         try {
@@ -28,50 +29,31 @@ public class SqliteFacade implements DatabaseFacade {
             ResultSet result = pstmt.getGeneratedKeys();
             int generatedKey = 0;
             if(result.next())
-            {
                 generatedKey = result.getInt(1); // ID świeżo dodanego rzędu
-            }
-            System.out.println("RowID of the newly added word is: " + generatedKey);
+
+            return generatedKey;
         } catch (SQLException e) {
             e.printStackTrace();
         }
-       /* try {
-            statement = connection.createStatement();
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-       int rows = 0;
-        try {
-            rows = statement.executeUpdate(sql);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        if(rows > 0)
-        {
-            System.out.println("row created");
-        }*/
-
-
+        return -1;
     }
 
-    @Override
     public void updateWord(String word, Word word2) {
-    String sql = "UPDATE words SET word = ?," + "translation = ?, " + "difficulty = ? " + "WHERE word = ?";
-    //System.out.println(word2.getWordWord() +" "+ word2.getWordDifficulty() + " "+ word2.getWordTranslation());
-    try{
-        PreparedStatement pstmt = connection.prepareStatement(sql);
-        pstmt.setString(1,word2.getWord());
-        pstmt.setString(2,word2.getTranslation());
-        pstmt.setString(3,word2.getDifficulty());
-        pstmt.setString(4,word);
-        pstmt.executeUpdate();
-    } catch (Exception e) {
-        e.printStackTrace();
-    }
+        String sql = "UPDATE words SET word = ?," + "translation = ?, " + "difficulty = ? " + "WHERE word = ?";
+        //System.out.println(word2.getWordWord() +" "+ word2.getWordDifficulty() + " "+ word2.getWordTranslation());
+        try{
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1,word2.getWord());
+            pstmt.setString(2,word2.getTranslation());
+            pstmt.setString(3,word2.getDifficulty());
+            pstmt.setString(4,word);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    @Override
     public void deleteWord(int ID) {
         String sql = "DELETE FROM words WHERE rowid = ?";
         try {
@@ -84,7 +66,6 @@ public class SqliteFacade implements DatabaseFacade {
         }
     }
 
-    @Override
     public Word getWord(int ID) {
         String sql = "select rowid, * from words";
         try {
@@ -97,7 +78,7 @@ public class SqliteFacade implements DatabaseFacade {
                 String word = result.getString("word");
                 String translation = result.getString("translation");
                 String difficulty = result.getString("difficulty");
-                    Word nextWord = new Word(word, translation, difficulty);
+                    Word nextWord = new Word(rowid, word, translation, difficulty);
                     return nextWord;
                 }
             }
@@ -107,7 +88,6 @@ public class SqliteFacade implements DatabaseFacade {
         return null;
     }
 
-    @Override
     public ArrayList<Word> getAllWords() {
         String sql = "select rowid, * from words";
         words.clear();
@@ -120,7 +100,7 @@ public class SqliteFacade implements DatabaseFacade {
                 String translation = result.getString("translation");
                 String difficulty = result.getString("difficulty");
 
-                Word nextWord = new Word(word,translation,difficulty);
+                Word nextWord = new Word(rowid, word,translation,difficulty);
                 //System.out.println(nextWord.getWord() +" "+ nextWord.getTranslation() + " "+difficulty );
                 this.words.add(nextWord);
             }
@@ -143,7 +123,7 @@ public class SqliteFacade implements DatabaseFacade {
                 String word = result.getString("word");
                 String translation = result.getString("translation");
                 String difficulty = result.getString("difficulty");
-                Word nextWord = new Word(word,translation,difficulty);
+                Word nextWord = new Word(rowid, word,translation,difficulty);
                 //System.out.println(nextWord.getWord() +" "+ nextWord.getTranslation() + " "+difficulty );
                 this.words.add(nextWord);
             }

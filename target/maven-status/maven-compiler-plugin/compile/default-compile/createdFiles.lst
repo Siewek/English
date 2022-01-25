@@ -5,7 +5,6 @@ Controllers\DbManagerScene$1.class
 Controllers\HomeScene.class
 Controllers\SettingsScene.class
 EasyDifficulty.class
-DesignPatterns\DatabaseFacade.class
 Program.class
 Memento.class
 Controllers\QuestionScene.class

@@ -113,13 +113,13 @@ public class DbManagerScene implements Initializable {
         }
 
         String difficulty = easyRadioBtn.isSelected() ? "easy" : (mediumRadioBtn.isSelected() ? "medium" : "hard" );
-        Word word = new Word(wordField.getText().trim(),
+        Word word = new Word(0, wordField.getText().trim(),
                 translationField.getText(), difficulty);
 
         try {
             SqliteFacade sqliteFacade = new SqliteFacade();
-            sqliteFacade.addWord(word);
-            words.add(word);
+            long id = sqliteFacade.addWord(word);
+            words.add( new Word(id, word.getWord(), word.getTranslation(), word.getDifficulty()));
         } catch(SQLException exception) {
             exception.printStackTrace();
             exception.getCause();

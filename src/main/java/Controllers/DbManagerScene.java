@@ -37,7 +37,6 @@ public class DbManagerScene implements Initializable {
     @FXML private Button deleteSelecetedBtn;
 
     private final ObservableList<Word> words = FXCollections.observableArrayList();
-    private Word selectedWord = null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -80,32 +79,29 @@ public class DbManagerScene implements Initializable {
         wordsTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Word>() {
             @Override
             public void changed(ObservableValue<? extends Word> observableValue, Word word, Word t1) {
-                if(t1 != null) {
-                    selectedWord = t1;
+                if(t1 != null)
                     deleteSelecetedBtn.setDisable(false);
-                }
-                else {
-                    selectedWord = null;
+                else
                     deleteSelecetedBtn.setDisable(true);
-                }
             }
         });
     }
 
     @FXML public void OnDeleteItem(ActionEvent actionEvent) {
-        if(selectedWord == null) {
-            deleteSelecetedBtn.setDisable(true);
-            return;
-        }
+
+        Word selectedItem = wordsTableView.getSelectionModel().getSelectedItem();
 
         try {
             SqliteFacade sqliteFacade = new SqliteFacade();
-            //sqliteFacade.deleteWord();
+            sqliteFacade.deleteWord((int) selectedItem.getId());
 
+            words.removeAll(selectedItem);
         } catch (SQLException exception) {
             exception.printStackTrace();
             exception.getCause();
         }
+
+        wordsTableView.getSelectionModel().clearSelection();
     }
 
     @FXML public void OnAddWord(ActionEvent actionEvent) {

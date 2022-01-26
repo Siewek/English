@@ -6,7 +6,7 @@ import Data.Word;
 import java.util.ArrayList;
 
 public class EasyDifficulty implements DifficultyStrategy {
-    private long ctr = 0; // counter;
+    private static long ctr = 0; // counter;
     private static int answersNumber = 2;
 
     public Word chooseNextQuestion(QuestionProvider provider) {

@@ -39,7 +39,7 @@ public class Question {
     }
 
     public boolean validate(String answer) {
-        if(questionWord.getTranslation().toLowerCase().equals(answer.toLowerCase()))
+        if(answer != null && questionWord.getTranslation().toLowerCase().equals(answer.toLowerCase()))
                 return true;
 
         return false;

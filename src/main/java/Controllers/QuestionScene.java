@@ -3,17 +3,12 @@ package Controllers;
 import Data.Question;
 import Data.QuestionProvider;
 import Data.Word;
-import DesignPatterns.EasyDifficulty;
-import DesignPatterns.MediumDifficulty;
-import DesignPatterns.SqliteFacade;
+import DesignPatterns.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
@@ -36,6 +31,8 @@ public class QuestionScene implements Initializable {
     private int rightAnswers = 0;
 
     private String selectedAnswer;
+    private int level = 1;
+    private final int maxLevel = 3;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -60,12 +57,31 @@ public class QuestionScene implements Initializable {
 
     @FXML public void OnNextQuestion(ActionEvent actionEvent) {
 
+        System.out.println(selectedAnswer);
+
         boolean result = currentQuestion.validate(selectedAnswer);
 
         if(result) {
             if(++rightAnswers >= 3) {
-                provider.setStrategy(new MediumDifficulty());
+                DifficultyStrategy strategy = null;
                 rightAnswers = 0;
+
+                if(level < maxLevel) {
+                    switch (++level) {
+                        case 2:
+                            strategy = new MediumDifficulty();
+                            break;
+                        case 3:
+                            strategy = new HardDifficulty();
+                            break;
+                        default:
+                            strategy = new EasyDifficulty();
+                            break;
+                    }
+                    provider.setStrategy(strategy);
+                } else if(level == maxLevel) {
+                    level = maxLevel+1;
+                }
             }
 
             wrongAnswers = 0;
@@ -78,6 +94,24 @@ public class QuestionScene implements Initializable {
             if(++wrongAnswers >= 3) {
                 provider.setStrategy(new EasyDifficulty());
                 wrongAnswers = 0;
+
+                DifficultyStrategy strategy = null;
+
+                if(level != 1) {
+                    switch (--level) {
+                        case 2:
+                            strategy = new MediumDifficulty();
+                            break;
+                        case 3:
+                            strategy = new HardDifficulty();
+                            break;
+                        default:
+                            strategy = new EasyDifficulty();
+                            break;
+                    }
+
+                    provider.setStrategy(strategy);
+                }
             }
 
             rightAnswers = 0;
@@ -88,6 +122,7 @@ public class QuestionScene implements Initializable {
         }
 
         this.setUpScene();
+        selectedAnswer = null;
     }
 
     @FXML public void OnPreviousQuestion(ActionEvent actionEvent) {
@@ -97,6 +132,16 @@ public class QuestionScene implements Initializable {
         answersVBox.getChildren().clear();
         currentQuestion = provider.getNextQuestion();
         questionLabel.setText(currentQuestion.getQuestionWord().getWord());
+
+        if(level == (maxLevel+1)) {
+            TextField textField = new TextField();
+            textField.setOnAction(actionEvent -> {
+                selectedAnswer = textField.getText();
+            });
+
+            answersVBox.getChildren().add(textField);
+            return;
+        }
 
         ToggleGroup toggleGroup = new ToggleGroup();
         for (Word answer: currentQuestion.getAnswers()) {

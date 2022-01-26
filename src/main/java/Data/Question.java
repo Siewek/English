@@ -12,7 +12,6 @@ public class Question {
 
     public Question(Word questionWord) {
         this.questionWord = questionWord;
-        this.answers = answers;
     }
 
     public void setAnswers(ArrayList<Word> answers) {

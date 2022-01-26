@@ -32,7 +32,6 @@ public class QuestionProvider {
 
 		ArrayList<Word> answers = strategy.chooseAnswers(this, word);
 		question.setAnswers(answers);
-		System.out.println(answers.size());
 
 		return question;
 	}

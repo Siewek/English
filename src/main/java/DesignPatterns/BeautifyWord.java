@@ -4,7 +4,7 @@ import Data.Word;
 
 public class BeautifyWord extends Word {
     public BeautifyWord(Word word) {
-        super(word);
+        super(word.getId(),word.getWord(), word.getTranslation(), word.getDifficulty());
     }
 
     @Override

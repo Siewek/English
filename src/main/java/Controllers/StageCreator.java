@@ -1,5 +1,6 @@
 package Controllers;
 
+import DesignPatterns.ControllerCmd;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -7,12 +8,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-interface Command {
-    public void execute(Object o);
-}
-
 public class StageCreator {
-    public static Stage create(String fxmlFile, String title, Command c) {
+    public static Stage create(String fxmlFile, String title, ControllerCmd c) {
         Stage stage = new Stage();
         try {
             FXMLLoader root = new FXMLLoader(StageCreator.class.getResource(fxmlFile));

@@ -7,14 +7,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Summary">
    <children>
       <VBox layoutX="35.0" layoutY="21.0" prefHeight="351.0" prefWidth="509.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
-                  <Label fx:id="scoreLabel" text="Score">
+                  <Label text="Score">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="scoreLabel" layoutX="228.0" layoutY="38.0">
                      <font>
                         <Font size="30.0" />
                      </font>

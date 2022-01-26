@@ -1,6 +1,5 @@
 package Data;
 
-import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 
 public class Word {

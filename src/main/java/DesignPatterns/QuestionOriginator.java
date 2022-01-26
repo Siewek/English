@@ -1,4 +1,7 @@
+package DesignPatterns;
+
 import Data.Question;
+import DesignPatterns.Memento;
 
 public class QuestionOriginator {
 

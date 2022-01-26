@@ -1,20 +1,22 @@
 package Data;
 
+import DesignPatterns.Caretaker;
 import DesignPatterns.DifficultyStrategy;
 import DesignPatterns.EasyDifficulty;
+import DesignPatterns.QuestionOriginator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class QuestionProvider {
 	public enum Level { NONE, EASY, MEDIUM, HARD }
-
 	private ArrayList<Word> wordsPool = new ArrayList<>();
 	private DifficultyStrategy strategy;
 
 	public QuestionProvider(ArrayList<Word> wordsPool) {
 		strategy = new EasyDifficulty();
 		this.wordsPool = wordsPool;
+
 	}
 
 	public QuestionProvider(DifficultyStrategy strategy, ArrayList<Word> wordsPool) {

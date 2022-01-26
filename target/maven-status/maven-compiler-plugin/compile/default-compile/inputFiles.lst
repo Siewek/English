@@ -1,29 +1,29 @@
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\QuestionOriginator.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\DesignPatterns\HardDifficulty.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\MusicPlayer.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Controllers\DbManagerScene.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\DesignPatterns\DifficultyStrategy.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Controllers\Summary.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\DesignPatterns\BeautifyWord.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Controllers\StageCreator.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Controllers\HomeScene.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Controllers\QuestionScene.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Memento.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\EndlessState.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\DesignPatterns\ControllerCmd.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Track2.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Caretaker.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\LearningSegment.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\DesignPatterns\SceneState.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\DesignPatterns\ReversedWord.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Data\QuestionProvider.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Data\Question.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\DesignPatterns\MediumDifficulty.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\QuizState.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\StateMode.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\DesignPatterns\SqliteFacade.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Controllers\SettingsScene.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Track1.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\DesignPatterns\EasyDifficulty.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Data\Word.java
-C:\Users\Lenovo\IdeaProjects\LearnEnglishZTP\src\main\java\Program.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\DesignPatterns\Memento.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\DesignPatterns\SceneState.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\DesignPatterns\ReversedWord.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\Controllers\DbManagerScene.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\DesignPatterns\EasyDifficulty.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\DesignPatterns\HardDifficulty.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\StateMode.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\Data\Word.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\DesignPatterns\DifficultyStrategy.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\EndlessState.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\Data\QuestionProvider.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\Controllers\SettingsScene.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\MusicPlayer.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\LearningSegment.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\QuizState.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\Controllers\HomeScene.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\Data\Question.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\DesignPatterns\BeautifyWord.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\DesignPatterns\Caretaker.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\Track2.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\DesignPatterns\ControllerCmd.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\Controllers\StageCreator.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\DesignPatterns\SqliteFacade.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\DesignPatterns\MediumDifficulty.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\Program.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\Track1.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\Controllers\QuestionScene.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\DesignPatterns\QuestionOriginator.java
+G:\Studia\Semestr 5\ZTP\English\src\main\java\Controllers\Summary.java

@@ -47,6 +47,8 @@ public class QuestionScene implements Initializable {
 
     private ArrayList<Word> words = new ArrayList<>();
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         answersVBox.setAlignment(Pos.CENTER);
@@ -82,10 +84,11 @@ public class QuestionScene implements Initializable {
         setUpScene();
     }
 
-    private void setUpScene() {
+    private void setUpSceneMemento(Question question) {
         answersVBox.getChildren().clear();
-        currentQuestion = provider.getNextQuestion();
+        currentQuestion = question;
         questionLabel.setText(currentQuestion.getQuestionWord().getWord());
+
 
         if(level == (maxLevel+1)) {
             TextField textField = new TextField();
@@ -114,7 +117,39 @@ public class QuestionScene implements Initializable {
             answersVBox.getChildren().add(b);
         }
     }
+    private void setUpScene() {
+        answersVBox.getChildren().clear();
+        currentQuestion = provider.getNextQuestion();
+        questionLabel.setText(currentQuestion.getQuestionWord().getWord());
 
+
+        if(level == (maxLevel+1)) {
+            TextField textField = new TextField();
+            textField.setOnAction(actionEvent -> {
+                selectedAnswer = textField.getText();
+            });
+
+            answersVBox.getChildren().add(textField);
+            return;
+        }
+
+        ToggleGroup toggleGroup = new ToggleGroup();
+        for (Word answer: currentQuestion.getAnswers()) {
+            RadioButton b = new RadioButton(answer.getTranslation());
+            b.setToggleGroup(toggleGroup);
+
+            b.setOnAction(actionEvent -> {
+                RadioButton radioButton = (RadioButton) actionEvent.getSource();
+
+                if(radioButton == null)
+                    return;
+
+                selectedAnswer = radioButton.getText();
+            });
+
+            answersVBox.getChildren().add(b);
+        }
+    }
     public void setPolicy(DifficultyPolicy policy) {
         this.state.SetDifficulty(policy);
     }
@@ -129,6 +164,9 @@ public class QuestionScene implements Initializable {
 
     public static class QuizState implements SceneState {
         private final QuestionScene scene;
+        private QuestionOriginator originator = new QuestionOriginator();
+        private Caretaker caretaker = new Caretaker();
+        private int questionIndex = 0;
 
         QuizState(QuestionScene scene) {
             this.scene = scene;
@@ -143,7 +181,9 @@ public class QuestionScene implements Initializable {
         @Override
         public void OnNextQuestion() {
             boolean result = scene.currentQuestion.validate(scene.selectedAnswer);
-
+            originator.setQuestion(scene.currentQuestion);
+            caretaker.addMemento(originator.createMemento());
+            questionIndex++;
             if(result) {
                 if(++scene.rightAnswers >= 3) {
                     DifficultyStrategy strategy = null;
@@ -200,12 +240,18 @@ public class QuestionScene implements Initializable {
             }
 
             scene.setUpScene();
+
             scene.selectedAnswer = null;
         }
 
         @Override
         public void OnPrevQuestion() {
             // MOMENTO ??
+            if(questionIndex - 1!=-1) {
+                scene.currentQuestion = originator.restoreMemento(caretaker.getMemento(questionIndex - 1));
+                scene.setUpSceneMemento(scene.currentQuestion);
+                scene.selectedAnswer = null;
+            }
         }
 
         @Override

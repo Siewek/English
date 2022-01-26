@@ -1,6 +1,8 @@
 package Data;
 
 import Data.Word;
+import DesignPatterns.BeautifyWord;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 
@@ -22,10 +24,14 @@ public class Question {
                 return o1.getTranslation().compareTo(o2.getTranslation());
             }
         });
+
+        for(int i = 0; i < this.answers.size(); i++) {
+            this.answers.set(i, new BeautifyWord(this.answers.get(i)));
+        }
     }
 
     public Word getQuestionWord() {
-        return questionWord;
+        return new BeautifyWord(questionWord); // dekorator
     }
 
     public ArrayList<Word> getAnswers() {
@@ -33,10 +39,8 @@ public class Question {
     }
 
     public boolean validate(String answer) {
-        for (Word word: answers) {
-            if(word.getTranslation().toLowerCase().equals(answer.toLowerCase()))
+        if(questionWord.getTranslation().toLowerCase().equals(answer.toLowerCase()))
                 return true;
-        }
 
         return false;
     }

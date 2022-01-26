@@ -1,3 +1,5 @@
+import Data.QuestionProvider;
+
 public class QuizState implements StateMode{
 
     LearningSegment learningSegment;
@@ -14,12 +16,12 @@ public class QuizState implements StateMode{
 
     @Override
     public void addPoints() {
-    question.setScore(question.getScore()+1);
+    //question.setScore(question.getScore()+1);
     }
 
     @Override
     public void removePoints() {
-        question.setScore(question.getScore()-1);
+        //question.setScore(question.getScore()-1);
     }
 
     @Override

@@ -18,6 +18,13 @@ public class Word {
         this.difficulty = difficulty;
     }
 
+    public Word(Word word) {
+        this.id = word.id;
+        this.word = word.word;
+        this.translation = word.translation;
+        this.difficulty = word.difficulty;
+    }
+
     public String getWord() {
         return this.word;
     }

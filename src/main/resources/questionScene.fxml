@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="519.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.QuestionScene">
    <children>
@@ -17,9 +18,17 @@
                   <ProgressBar fx:id="progressBar" prefWidth="200.0" progress="0.0" />
                </children>
             </HBox>
-            <HBox alignment="CENTER" prefHeight="84.0" prefWidth="730.0">
+            <HBox alignment="CENTER" prefHeight="84.0" prefWidth="730.0" spacing="10.0">
                <children>
-                  <Label fx:id="questionLabel" prefHeight="17.0" prefWidth="87.0" text="Data.Question: " />
+                  <Label text="Choose correct answer for:">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="questionLabel" prefHeight="21.0" prefWidth="111.0" text="Data.Question: ">
+                     <font>
+                        <Font size="15.0" />
+                     </font></Label>
                </children>
             </HBox>
             <VBox fx:id="answersVBox" alignment="CENTER" prefHeight="256.0" prefWidth="730.0" />

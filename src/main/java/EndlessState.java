@@ -1,3 +1,5 @@
+import Data.QuestionProvider;
+
 public class EndlessState implements StateMode{
     LearningSegment learningSegment;
     private QuestionProvider question;
@@ -12,12 +14,12 @@ public class EndlessState implements StateMode{
 
     @Override
     public void addPoints() {
-        question.setScore(question.getScore()+2);
+        //question.setScore(question.getScore()+2);
     }
 
     @Override
     public void removePoints() {
-        question.setScore(question.getScore()-1);
+       // question.setScore(question.getScore()-1);
     }
 
     @Override

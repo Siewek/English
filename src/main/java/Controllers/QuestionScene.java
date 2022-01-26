@@ -54,6 +54,9 @@ public class QuestionScene implements Initializable {
         answersVBox.setAlignment(Pos.CENTER);
         answersVBox.setSpacing(15d);
 
+        MusicPlayer musicPlayer = new MusicPlayer("../Glitter Blast.mp3");
+        musicPlayer.play();
+
         try {
             SqliteFacade sqliteFacade = new SqliteFacade();
             words = sqliteFacade.getAllWords();

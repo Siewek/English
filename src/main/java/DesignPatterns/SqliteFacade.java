@@ -8,16 +8,11 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 public class SqliteFacade {
-    private static String jdbcUrl = "jdbc:sqlite:wordsdb.db";
     private final Connection connection;
-
     public ArrayList<Word> words = new ArrayList<Word>();
 
     public SqliteFacade() throws SQLException {
-        Properties connectionProperties = new Properties();
-        connectionProperties.put("charSet", "UTF8");
-        connectionProperties.put("encoding", "UTF8");
-        connection= DriverManager.getConnection(jdbcUrl, connectionProperties);
+        connection = ConnectionSingleton.getInstance();
     }
 
     public int addWord(Word word) {
@@ -110,8 +105,9 @@ public class SqliteFacade {
         }
         return null;
     }
-    public ArrayList<Word> getWordsOfDifficulty(String wantedDifficutly)
-    {String sql = "select rowid, * from words WHERE difficulty = ?";
+    public ArrayList<Word> getWordsOfDifficulty(String wantedDifficutly) {
+        String sql = "select rowid, * from words WHERE difficulty = ?";
+
         try{
             words.clear();
             PreparedStatement pstmt = connection.prepareStatement(sql);

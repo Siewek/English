@@ -1,3 +1,5 @@
+import Data.Question;
+
 public class QuestionOriginator {
 
     private Question question;

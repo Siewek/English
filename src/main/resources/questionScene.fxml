@@ -19,7 +19,7 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="84.0" prefWidth="730.0">
                <children>
-                  <Label fx:id="questionLabel" prefHeight="17.0" prefWidth="87.0" text="Question: " />
+                  <Label fx:id="questionLabel" prefHeight="17.0" prefWidth="87.0" text="Data.Question: " />
                </children>
             </HBox>
             <VBox fx:id="answersVBox" alignment="CENTER" prefHeight="256.0" prefWidth="730.0" />

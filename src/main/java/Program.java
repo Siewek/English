@@ -13,7 +13,7 @@ public class Program extends Application {
 
        /*  //Testowanie Generowania Odpowiedzi
 
-       Question question = new Question();
+       Data.Question question = new Data.Question();
         question.setQuestion("Easy");
         ArrayList<String> answers = question.generateAnswers();
         for (int i = 0; i < answers.stream().count();i++)

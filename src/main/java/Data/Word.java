@@ -1,6 +1,7 @@
 package Data;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Objects;
 
 public class Word {
 
@@ -29,5 +30,18 @@ public class Word {
     }
     public long getId() {
         return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Word word1 = (Word) o;
+        return Objects.equals(word, word1.word) && Objects.equals(translation, word1.translation) && Objects.equals(difficulty, word1.difficulty);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(word, translation, difficulty);
     }
 }
